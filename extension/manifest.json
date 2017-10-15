@@ -20,7 +20,7 @@
     ]
   },
   "minimum_chrome_version": "50",
-  "content_security_policy": "script-src 'self' https://www.steempunk.net; object-src 'self'; child-src https://www.steempunk.net",
+  "content_security_policy": "script-src 'self' https://v2.steemconnect.com/ https://profile.steempunk.net/ https://www.steempunk.net; object-src 'self'; child-src https://v2.steemconnect.com/ https://profile.steempunk.net/ https://www.steempunk.net",
   "web_accessible_resources": [
     "assets/images/logo.png",
     "assets/javascripts/plugin.js",

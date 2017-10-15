@@ -17,12 +17,13 @@ window.SteempunkNet = {
     },
 
     $execute: function () {
-        if (window.parent.window.parent.location.toString().match('https://www.steempunk.net/')) {
+        if (window.parent.window.parent.location.toString().match('https://profile.steempunk.net/')) {
             return;
         }
 
-        var scripts = document.querySelectorAll('script');
-        var filter  = Array.prototype.filter;
+        var self    = this,
+            scripts = document.querySelectorAll('script'),
+            filter  = Array.prototype.filter;
 
         scripts = filter.call(scripts, function (Node) {
             return Node.getAttribute('data-steempunk');
@@ -60,7 +61,36 @@ window.SteempunkNet = {
 
         document.body.appendChild(this.Container);
 
-        var self = this;
+        // global messages
+        window.addEventListener('message', function (event) {
+            var data = event.data;
+
+            if (typeof data === 'undefined') {
+                return;
+            }
+
+            if (typeof data.event === 'undefined') {
+                return;
+            }
+
+            if (data.event !== "STEEMPUNK-EVENT") {
+                return;
+            }
+
+            switch (data.type) {
+                case'STEEMPUNK-GET-URL':
+                    self.postMessage({
+                        type  : 'STEEMPUNK-GET-URL-RESULT',
+                        result: window.location.toString()
+                    });
+                    break;
+            }
+        });
+
+        window.SteempunkNet.postMessage({
+            type  : 'STEEMPUNK-GET-URL-LOAD',
+            result: window.location.toString()
+        });
 
         setTimeout(function () {
             self.open();
@@ -98,6 +128,14 @@ window.SteempunkNet = {
         }
 
         this.open();
+    },
+
+    /**
+     * Send a message to the steempunk frame
+     * @param data
+     */
+    postMessage: function (data) {
+        this.Frame.contentWindow.postMessage(data, '*');
     }
 };
 
@@ -110,8 +148,19 @@ if (typeof document.body === 'undefined') {
     window.SteempunkNet.init();
 }
 
+// location change listener (bad workaround)
+var steempunkHistoryListener = function () {
+    window.SteempunkNet.postMessage({
+        type  : 'STEEMPUNK-GET-URL-CHANGE',
+        result: window.location.toString()
+    });
+};
 
-// steemoji insert
+window.addEventListener('pushstate', steempunkHistoryListener);
+window.addEventListener('popstate', steempunkHistoryListener);
+window.addEventListener('hashchange', steempunkHistoryListener);
+
+// STEEMPUNK-NET menu listener
 window.addEventListener("STEEMPUNK-MENU", function () {
     window.SteempunkNet.toggle();
 });
