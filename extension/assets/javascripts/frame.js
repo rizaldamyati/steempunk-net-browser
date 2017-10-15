@@ -1,10 +1,18 @@
-window.addEventListener('load', function () {
-    var Closer = document.querySelector('.steemit-close');
+window.addEventListener('message', function (event) {
+    var Frame = document.querySelector('iframe');
 
-    console.log(window.parent.SteempunkNet);
+    if (typeof Frame === 'undefined') {
+        return;
+    }
 
-    Closer.addEventListener('click', function () {
+    if (typeof Frame.contentWindow === 'undefined') {
+        return;
+    }
 
-    });
-
+    Frame.contentWindow.postMessage({
+        orgin    : event.origin,
+        data     : event.data,
+        type     : event.type,
+        timeStamp: event.timeStamp
+    }, '*');
 });

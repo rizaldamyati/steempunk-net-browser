@@ -90,6 +90,8 @@ window.SteempunkNet = {
      * Toggle the profile menu
      */
     toggle: function () {
+        this.Frame.contentWindow.postMessage('toggle window', '*');
+
         if (this.Container.classList.contains('steempunk-net-opened')) {
             this.close();
             return;
