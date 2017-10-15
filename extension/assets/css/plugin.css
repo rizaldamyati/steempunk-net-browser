@@ -1,9 +1,67 @@
 .steempunk-net {
-    outline: 1px solid red;
+    background: #fff;
     border: none;
     height: 100%;
-    position: absolute;
+    opacity: 0;
+    overflow: hidden;
+    position: fixed;
     top: 0;
     right: 0;
-    width: 300px;
+    width: 0;
+    z-index: 2000;
+}
+
+.steempunk-net-opened {
+    background: #f5f5f5;
+    box-shadow: 3px 0 20px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: width .2s, box-shadow 0.1s linear .1s;
+    -webkit-transition: width .2s, box-shadow .1s linear .1s;
+    width: 360px;
+    will-change: width;
+}
+
+.steempunk-net-close {
+    transition: width .2s, box-shadow 0.1s linear .1s;
+    -webkit-transition: width .2s, box-shadow .1s linear .1s;
+    width: 0;
+    will-change: width;
+}
+
+/** Header
+ ==============================================  */
+
+.steempunk-net-header {
+    float: left;
+    height: 60px;
+    text-align: center;
+    width: 100%;
+}
+
+.steempunk-net-header img {
+    height: 40px;
+    margin-top: 10px;
+}
+
+.steempunk-net .fa-close {
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+}
+
+.steempunk-net .fa-close:before {
+    content: '\00d7';
+}
+
+/** Content Frame
+ ==============================================  */
+
+.steempunk-net-frame-profile {
+    border: none;
+    height: calc(100% - 60px);
+    width: 360px;
 }

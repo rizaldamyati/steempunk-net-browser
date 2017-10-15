@@ -8,6 +8,7 @@
     "32": "assets/images/logo.png"
   },
   "permissions": [
+    "contextMenus",
     "activeTab",
     "storage",
     "https://steempunk.net/*",
@@ -19,10 +20,13 @@
     ]
   },
   "minimum_chrome_version": "50",
-  "content_security_policy": "script-src 'self'; object-src 'self'; child-src https://www.steempunk.net",
+  "content_security_policy": "script-src 'self' https://www.steempunk.net; object-src 'self'; child-src https://www.steempunk.net",
   "web_accessible_resources": [
+    "assets/images/logo.png",
     "assets/javascripts/plugin.js",
-    "assets/css/plugin.css"
+    "assets/javascripts/frame.js",
+    "assets/css/plugin.css",
+    "assets/frame.html"
   ],
   "content_scripts": [
     {
@@ -31,7 +35,8 @@
       ],
       "js": [
         "content.js"
-      ]
+      ],
+      "all_frames": true
     }
   ]
 }
