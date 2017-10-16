@@ -1,11 +1,12 @@
 (function (window, document) {
     var urls = [
-        'https://steemit.com/'
+        'https://steemit.com/',
+        'steemit.com'
     ];
 
     var loc = window.location.host;
 
-    if (false && urls.indexOf(loc) === -1) {
+    if (urls.indexOf(loc) === -1) {
         return;
     }
 
