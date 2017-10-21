@@ -12,9 +12,27 @@
 
     var s = document.createElement('script');
     s.setAttribute('type', 'text/javascript');
+    s.setAttribute('src', chrome.extension.getURL('/assets/javascripts/history-events.js'));
+    s.setAttribute('data-dir', chrome.extension.getURL('/'));
+    document.body.appendChild(s);
+
+    s = document.createElement('script');
+    s.setAttribute('type', 'text/javascript');
     s.setAttribute('src', chrome.extension.getURL('/assets/javascripts/plugin.js'));
     s.setAttribute('data-dir', chrome.extension.getURL('/'));
     s.setAttribute('data-steempunk', '1');
+    document.body.appendChild(s);
+
+    s = document.createElement('script');
+    s.setAttribute('type', 'text/javascript');
+    s.setAttribute('src', chrome.extension.getURL('/assets/javascripts/messages.js'));
+    s.setAttribute('data-dir', chrome.extension.getURL('/'));
+    document.body.appendChild(s);
+
+    s = document.createElement('script');
+    s.setAttribute('type', 'text/javascript');
+    s.setAttribute('src', chrome.extension.getURL('/assets/javascripts/items.js'));
+    s.setAttribute('data-dir', chrome.extension.getURL('/'));
     document.body.appendChild(s);
 
     s = document.createElement('link');
@@ -48,7 +66,6 @@
             event = document.createEvent("CustomEvent");
             event.initCustomEvent("STEEMPUNK-MENU", true, true, {});
             window.dispatchEvent(event);
-            return;
         }
     };
 

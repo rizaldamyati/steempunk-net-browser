@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "STEEMPUNK-NET",
   "description": "Browser Extension for www.steempunk.net",
-  "version": "0.1",
+  "version": "0.2",
   "icons": {
     "16": "assets/images/logo.png",
     "32": "assets/images/logo.png"
@@ -23,7 +23,11 @@
   "content_security_policy": "script-src 'self' https://v2.steemconnect.com/ https://profile.steempunk.net/ https://www.steempunk.net; object-src 'self'; child-src https://v2.steemconnect.com/ https://profile.steempunk.net/ https://www.steempunk.net",
   "web_accessible_resources": [
     "assets/images/logo.png",
+    "assets/images/messageBackground.jpg",
+    "assets/javascripts/history-events.js",
     "assets/javascripts/plugin.js",
+    "assets/javascripts/messages.js",
+    "assets/javascripts/items.js",
     "assets/javascripts/frame.js",
     "assets/css/plugin.css",
     "assets/frame.html"

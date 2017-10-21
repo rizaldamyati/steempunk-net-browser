@@ -1,35 +1,90 @@
 /**
  * Steempunk integration into www.steemit.com
  *
- * @type {{init: SteempunkNet.init, $execute: SteempunkNet.$execute}}
+ * @author www.pcsg.de (Henning Leutz)
  */
 
-window.SteempunkNet = {
+if (typeof window.SteempunkNet === 'undefined') {
+    window.SteempunkNet = {};
+}
+
+/**
+ * main plugin functionality
+ *
+ * @type {{
+ *     Frame: null,
+ *     Container: null,
+ *     init: SteempunkNet.Plugin.init,
+ *     $execute: SteempunkNet.Plugin.$execute,
+ *     open: SteempunkNet.Plugin.open,
+ *     close: SteempunkNet.Plugin.close,
+ *     toggle: SteempunkNet.Plugin.toggle,
+ *     postMessage: SteempunkNet.Plugin.postMessage
+ * }}
+ */
+window.SteempunkNet.Plugin = {
 
     Frame    : null,
     Container: null,
+    directory: null,
 
     init: function () {
+        // location change listener
+        window.addEventListener('changestate', function () {
+            window.SteempunkNet.Plugin.postMessage({
+                type  : 'STEEMPUNK-GET-URL-CHANGE',
+                result: window.location.toString()
+            });
+        }, false);
+
+        // STEEMPUNK-NET menu listener
+        window.addEventListener("STEEMPUNK-MENU", function () {
+            window.SteempunkNet.Plugin.toggle();
+        }, false);
+
+        // debug message
+        // setTimeout(function () {
+        //     window.SteempunkNet.Messages.showMessage({
+        //         title  : 'Waffen bereit, Schilde hoch!',
+        //         content: 'Dein Interface meldet das du angegriffen wirst. Mach dich bereit!!'
+        //     });
+        // }, 5000);
+
         try {
             this.$execute();
         } catch (e) {
         }
     },
 
+    /**
+     * Return the chrome plugin directory
+     *
+     * @return {String}
+     */
+    getPluginDirectory: function () {
+        if (this.directory === null) {
+            var scripts = document.querySelectorAll('script'),
+                filter  = Array.prototype.filter;
+
+            scripts = filter.call(scripts, function (Node) {
+                return Node.getAttribute('data-steempunk');
+            });
+
+            this.directory = scripts[0].getAttribute('data-dir');
+        }
+
+        return this.directory;
+    },
+
+    /**
+     * Execute the frame initialization
+     */
     $execute: function () {
         if (window.parent.window.parent.location.toString().match('https://profile.steempunk.net/')) {
             return;
         }
 
-        var self    = this,
-            scripts = document.querySelectorAll('script'),
-            filter  = Array.prototype.filter;
-
-        scripts = filter.call(scripts, function (Node) {
-            return Node.getAttribute('data-steempunk');
-        });
-
-        var Dir = scripts[0].getAttribute('data-dir');
+        var Dir = this.getPluginDirectory();
 
         this.Container = document.createElement('div');
         this.Container.classList.add('steempunk-net');
@@ -61,51 +116,25 @@ window.SteempunkNet = {
 
         document.body.appendChild(this.Container);
 
-        // global messages
-        window.addEventListener('message', function (event) {
-            var data = event.data;
-
-            if (typeof data === 'undefined') {
-                return;
-            }
-
-            if (typeof data.event === 'undefined') {
-                return;
-            }
-
-            if (data.event !== "STEEMPUNK-EVENT") {
-                return;
-            }
-
-            switch (data.type) {
-                case'STEEMPUNK-GET-URL':
-                    self.postMessage({
-                        type  : 'STEEMPUNK-GET-URL-RESULT',
-                        result: window.location.toString()
-                    });
-                    break;
-            }
-        });
-
-        window.SteempunkNet.postMessage({
+        window.SteempunkNet.Plugin.postMessage({
             type  : 'STEEMPUNK-GET-URL-LOAD',
             result: window.location.toString()
         });
 
-        setTimeout(function () {
-            self.open();
-        }, 1000);
+        // setTimeout(function () {
+        //     self.open();
+        // }, 1000);
     },
 
     /**
-     * open the profile menu
+     * opens the steempunk menu
      */
     open: function () {
         this.Container.classList.add('steempunk-net-opened');
     },
 
     /**
-     * close the profile menu
+     * close the steempunk menu
      */
     close: function () {
         this.Container.classList.add('steempunk-net-close');
@@ -117,7 +146,7 @@ window.SteempunkNet = {
     },
 
     /**
-     * Toggle the profile menu
+     * toggle the steempunk menu
      */
     toggle: function () {
         this.Frame.contentWindow.postMessage('toggle window', '*');
@@ -131,36 +160,19 @@ window.SteempunkNet = {
     },
 
     /**
-     * Send a message to the steempunk frame
-     * @param data
+     * posts messages -> messages through the frames
      */
     postMessage: function (data) {
         this.Frame.contentWindow.postMessage(data, '*');
     }
 };
 
+// loading / init
 if (typeof document.body === 'undefined') {
     window.addEventListener("load", function load() {
         window.removeEventListener("load", load, false);
-        window.SteempunkNet.init();
+        window.SteempunkNet.Plugin.init();
     }, false);
 } else {
-    window.SteempunkNet.init();
+    window.SteempunkNet.Plugin.init();
 }
-
-// location change listener (bad workaround)
-var steempunkHistoryListener = function () {
-    window.SteempunkNet.postMessage({
-        type  : 'STEEMPUNK-GET-URL-CHANGE',
-        result: window.location.toString()
-    });
-};
-
-window.addEventListener('pushstate', steempunkHistoryListener);
-window.addEventListener('popstate', steempunkHistoryListener);
-window.addEventListener('hashchange', steempunkHistoryListener);
-
-// STEEMPUNK-NET menu listener
-window.addEventListener("STEEMPUNK-MENU", function () {
-    window.SteempunkNet.toggle();
-});
