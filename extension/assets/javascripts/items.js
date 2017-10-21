@@ -9,7 +9,13 @@ if (typeof window.SteempunkNet === 'undefined') {
 
 window.SteempunkNet.Items = {
     init: function () {
-
+        // cleanup
+        window.addEventListener('changestate', function () {
+            var items = document.querySelectorAll('.sp-item');
+            for (var i = 0, len = items.length; i < len; i++) {
+                items[i].parentNode.removeChild(items[i]);
+            }
+        });
     },
 
     /**
