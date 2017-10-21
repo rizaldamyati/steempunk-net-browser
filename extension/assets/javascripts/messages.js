@@ -56,10 +56,10 @@ window.SteempunkNet.Messages = {
                 result: window.location.toString()
             });
 
-            setTimeout(update, 10000);
+            setTimeout(update, 60000);
         };
 
-        setTimeout(update, 10000);
+        setTimeout(update, 60000);
     },
 
     /**
