@@ -96,6 +96,7 @@
     -webkit-transition: bottom .2s, opacity .2s;
     width: 500px;
     will-change: bottom, opacity;
+    z-index: 3000;
 }
 
 .sp-message-title {

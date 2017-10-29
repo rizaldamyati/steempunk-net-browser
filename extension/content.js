@@ -1,7 +1,9 @@
 (function (window, document) {
     var urls = [
         'https://steemit.com/',
-        'steemit.com'
+        'steemit.com',
+        'steempunk.hen.pcsg',
+        'https://steempunk.hen.pcsg/'
     ];
 
     var loc = window.location.host;

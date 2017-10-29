@@ -44,7 +44,15 @@ window.SteempunkNet.Messages = {
                     break;
 
                 case'STEEMPUNK-CREATE-USER-MESSAGE':
-                    window.SteempunkNet.Messages.showMessage(data);
+                    window.SteempunkNet.Messages.showMessage(JSON.parse(data.data));
+                    break;
+
+                case'STEEMPUNK-MENU-OPEN':
+                    window.SteempunkNet.Plugin.open();
+                    break;
+
+                case'STEEMPUNK-MENU-CLOSE':
+                    window.SteempunkNet.Plugin.close();
                     break;
             }
         }, false);
