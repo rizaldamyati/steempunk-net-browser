@@ -134,6 +134,13 @@ window.SteempunkNet.Plugin = {
     },
 
     /**
+     * opens the steempunk menu in the welcome mode
+     */
+    welcome: function () {
+        this.Container.classList.add('steempunk-net-welcome');
+    },
+
+    /**
      * close the steempunk menu
      */
     close: function () {
@@ -142,6 +149,7 @@ window.SteempunkNet.Plugin = {
         setTimeout(function () {
             this.Container.classList.remove('steempunk-net-close');
             this.Container.classList.remove('steempunk-net-opened');
+            this.Container.classList.remove('steempunk-net-welcome');
         }.bind(this), 250);
     },
 

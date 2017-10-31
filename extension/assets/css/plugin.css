@@ -21,6 +21,19 @@
     will-change: width;
 }
 
+.steempunk-net-welcome {
+    background: #f5f5f5;
+    box-shadow: 3px 0 20px rgba(0, 0, 0, 0.2);
+    height: 90%;
+    left: 5%;
+    opacity: 1;
+    top: 5%;
+    transition: width .2s, box-shadow 0.1s linear .1s;
+    -webkit-transition: width .2s, box-shadow .1s linear .1s;
+    width: 90%;
+    will-change: width;
+}
+
 .steempunk-net-close {
     transition: width .2s, box-shadow 0.1s linear .1s;
     -webkit-transition: width .2s, box-shadow .1s linear .1s;
@@ -43,6 +56,10 @@
 .steempunk-net-header img {
     height: 40px;
     margin-top: 10px;
+}
+
+.steempunk-net-welcome .steempunk-net-header {
+    display: none;
 }
 
 .sp-message .fa-close,
@@ -68,6 +85,11 @@
     border: none;
     height: calc(100% - 60px);
     width: 360px;
+}
+
+.steempunk-net-welcome .steempunk-net-frame-profile {
+    height: 100%;
+    width: 100%;
 }
 
 /** Icons

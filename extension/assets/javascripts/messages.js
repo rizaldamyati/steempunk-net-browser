@@ -54,6 +54,10 @@ window.SteempunkNet.Messages = {
                 case'STEEMPUNK-MENU-CLOSE':
                     window.SteempunkNet.Plugin.close();
                     break;
+
+                case'STEEMPUNK-WELCOME':
+                    window.SteempunkNet.Plugin.welcome();
+                    break;
             }
         }, false);
 
