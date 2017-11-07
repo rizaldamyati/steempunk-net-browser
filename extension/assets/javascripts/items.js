@@ -47,10 +47,10 @@ window.SteempunkNet.Items = {
             Item.style.position   = 'absolute';
             Item.style.top        = '100px';
             Item.style.left       = '100px';
-            Item.style.width      = '100px';
-            Item.style.height     = '100px';
+            Item.style.width      = '150px';
+            Item.style.height     = '150px';
             Item.style.zIndex     = 10;
-            Item.style.background = 'red';
+            Item.style.background = "url('https://steemitimages.com/DQmfG9nnrTYp212tPsS9YUDZkroh7AHg8YLQhxrPYjyLHhr/chest.png')";
 
             Item.setAttribute('data-itemid', data[i].id);
             Item.addEventListener('click', itemClick);
