@@ -27,7 +27,7 @@ window.SteempunkNet.Items = {
             data = [data];
         }
 
-        var i, len, Item;
+        var i, len, Item, randomPos;
 
         var itemClick = function () {
             window.SteempunkNet.Plugin.postMessage({
@@ -38,15 +38,47 @@ window.SteempunkNet.Items = {
             this.parentNode.removeChild(this);
         };
 
+        var getRandomInt = function (min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        };
+
+        var randomPosition = function () {
+            var body = document.body,
+                html = document.documentElement;
+
+            var height = Math.max(
+                body.scrollHeight,
+                body.offsetHeight,
+                html.clientHeight,
+                html.scrollHeight,
+                html.offsetHeight
+            );
+
+            var width = Math.max(
+                body.scrollWidth,
+                body.offsetWidth,
+                html.clientWidth,
+                html.scrollWidth,
+                html.offsetWidth
+            );
+
+            return {
+                top : getRandomInt(0, height - 150),
+                left: getRandomInt(0, width - 150)
+            };
+        };
+
         for (i = 0, len = data.length; i < len; i++) {
             Item = document.createElement('div');
             Item.classList.add('sp-item');
 
+            randomPos = randomPosition();
+
             // debug
             Item.style.cursor     = 'pointer';
             Item.style.position   = 'absolute';
-            Item.style.top        = '100px';
-            Item.style.left       = '100px';
+            Item.style.top        = randomPos.top + 'px';
+            Item.style.left       = randomPos.left + 'px';
             Item.style.width      = '150px';
             Item.style.height     = '150px';
             Item.style.zIndex     = 10;
