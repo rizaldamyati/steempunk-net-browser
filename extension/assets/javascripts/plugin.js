@@ -111,7 +111,8 @@ window.SteempunkNet.Plugin = {
         // content frame / frame
         this.Frame = document.createElement('iframe');
         this.Frame.classList.add('steempunk-net-frame-profile');
-        this.Frame.src = Dir + 'assets/frame.html';
+        this.Frame.src     = Dir + 'assets/frame.html';
+        this.Frame.sandbox = "allow-same-origin allow-scripts allow-forms";
         this.Container.appendChild(this.Frame);
 
         document.body.appendChild(this.Container);

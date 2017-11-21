@@ -71,12 +71,33 @@
         }
     };
 
-    if (typeof chrome !== 'undefined'
-        && typeof chrome.extension !== 'undefined'
-        && typeof chrome.extension.onMessage !== 'undefined'
-    ) {
+    var isChrome = function () {
+        return typeof chrome !== 'undefined' && typeof chrome.extension !== 'undefined'
+    };
+
+    var isWebExtension = function () {
+        return typeof browser !== 'undefined' && typeof browser.runtime !== 'undefined';
+    };
+
+    if (isChrome() && typeof chrome.extension.onMessage !== 'undefined') {
         chrome.extension.onMessage.addListener(messageListener);
-    } else if (typeof browser !== 'undefined' && typeof browser.runtime !== 'undefined') {
+    } else if (isWebExtension()) {
         browser.runtime.onMessage.addListener(messageListener);
+    }
+
+    // install update events
+    if (isChrome() && typeof chrome.extension.onInstalled !== 'undefined') {
+        chrome.runtime.onInstalled.addListener(function (details) {
+            if (details.reason === "install") {
+                console.log("This is a first install!");
+            } else if (details.reason === "update") {
+                var thisVersion = chrome.runtime.getManifest().version;
+                console.log("Updated from " + details.previousVersion + " to " + thisVersion + "!");
+            }
+        });
+    } else if (isWebExtension()) {
+        browser.runtime.onInstalled.addListener(function () {
+
+        });
     }
 })(window, document);

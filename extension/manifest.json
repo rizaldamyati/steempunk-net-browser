@@ -12,7 +12,9 @@
     "activeTab",
     "storage",
     "https://steempunk.net/*",
-    "https://www.steempunk.net/"
+    "https://www.steempunk.net/",
+    "https://profile.steempunk.net/",
+    "https://profile.steempunk.net/*"
   ],
   "background": {
     "scripts": [
