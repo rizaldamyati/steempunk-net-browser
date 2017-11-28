@@ -11,6 +11,11 @@
     z-index: 2000;
 }
 
+.steempunk-net-forSteemit {
+    height: calc(100% - 75px);
+    top: 75px;
+}
+
 .steempunk-net-opened {
     background: #f5f5f5;
     box-shadow: 3px 0 20px rgba(0, 0, 0, 0.2);
@@ -161,4 +166,36 @@
     text-align: center;
     top: 0;
     width: 50px;
+}
+
+/** Content Messages
+ ==============================================  */
+
+.steempunk-net-mini {
+    background-color: #3b3427;
+    bottom: 10px;
+    box-shadow: 3px 0 20px rgba(0, 0, 0, 0.2);
+    height: 50px;
+    position: fixed;
+    right: 10px;
+}
+
+.steempunk-net-mini button {
+    background-position: center center;
+    background-repeat: no-repeat;
+    color: #b89965;
+    cursor: pointer;
+    float: left;
+    font-size: 18px;
+    line-height: 50px;
+    text-align: center;
+    width: 70px;
+}
+
+.steempunk-net-mini button:hover {
+    background-color: rgba(255, 255, 255, .15);
+}
+
+.steempunk-net-mini-fight {
+    background-image: url('');
 }

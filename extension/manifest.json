@@ -2,10 +2,13 @@
   "manifest_version": 2,
   "name": "STEEMPUNK-NET",
   "description": "Browser Extension for www.steempunk.net",
-  "version": "0.6",
+  "version": "0.7",
   "icons": {
-    "16": "assets/images/logo.png",
-    "32": "assets/images/logo.png"
+    "16": "assets/images/icon_32x32.png",
+    "32": "assets/images/icon_48x48.png",
+    "48": "assets/images/icon_48x48.png",
+    "64": "assets/images/icon_64x64.png",
+    "128": "assets/images/icon_128x128.png"
   },
   "permissions": [
     "contextMenus",

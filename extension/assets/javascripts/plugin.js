@@ -14,6 +14,9 @@ if (typeof window.SteempunkNet === 'undefined') {
  * @type {{
  *     Frame: null,
  *     Container: null,
+ *     MiniPanel: null,
+ *     directory: null,
+ *
  *     init: SteempunkNet.Plugin.init,
  *     $execute: SteempunkNet.Plugin.$execute,
  *     open: SteempunkNet.Plugin.open,
@@ -26,6 +29,7 @@ window.SteempunkNet.Plugin = {
 
     Frame    : null,
     Container: null,
+    MiniPanel: null,
     directory: null,
 
     init: function () {
@@ -41,14 +45,6 @@ window.SteempunkNet.Plugin = {
         window.addEventListener("STEEMPUNK-MENU", function () {
             window.SteempunkNet.Plugin.toggle();
         }, false);
-
-        // debug message
-        // setTimeout(function () {
-        //     window.SteempunkNet.Messages.showMessage({
-        //         title  : 'Waffen bereit, Schilde hoch!',
-        //         content: 'Dein Interface meldet das du angegriffen wirst. Mach dich bereit!!'
-        //     });
-        // }, 5000);
 
         try {
             this.$execute();
@@ -89,6 +85,11 @@ window.SteempunkNet.Plugin = {
         this.Container = document.createElement('div');
         this.Container.classList.add('steempunk-net');
 
+        // frame sizes
+        if (window.location.host === 'steemit.com') {
+            this.Container.classList.add('steempunk-net-forSteemit');
+        }
+
         // header
         this.Header = document.createElement('div');
         this.Header.classList.add('steempunk-net-header');
@@ -122,9 +123,20 @@ window.SteempunkNet.Plugin = {
             result: window.location.toString()
         });
 
-        // setTimeout(function () {
-        //     self.open();
-        // }, 1000);
+
+        // mini panel
+        // this.MiniPanel = document.createElement('div');
+        // this.MiniPanel.classList.add('steempunk-net-mini');
+        //
+        // var Fight = document.createElement('button');
+        //
+        // Fight.classList.add('steempunk-net-mini-fight');
+        // Fight.addEventListener('click', function () {
+        //
+        // });
+        // this.MiniPanel.appendChild(Fight);
+
+        document.body.appendChild(this.MiniPanel);
     },
 
     /**
