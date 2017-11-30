@@ -40,7 +40,15 @@ window.SteempunkNet.Messages = {
                         console.warn(data);
                         console.warn(e);
                     }
+                    break;
 
+                case'STEEMPUNK-CLEAR-ITEMS':
+                    try {
+                        window.SteempunkNet.Items.clearAllItema();
+                    } catch (e) {
+                        console.warn(data);
+                        console.warn(e);
+                    }
                     break;
 
                 case'STEEMPUNK-CREATE-USER-MESSAGE':

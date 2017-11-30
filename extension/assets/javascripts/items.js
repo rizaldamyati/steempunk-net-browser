@@ -9,13 +9,12 @@ if (typeof window.SteempunkNet === 'undefined') {
 
 window.SteempunkNet.Items = {
     init: function () {
-        // cleanup
+        var self = this;
+
         window.addEventListener('changestate', function () {
-            var items = document.querySelectorAll('.sp-item');
-            for (var i = 0, len = items.length; i < len; i++) {
-                items[i].parentNode.removeChild(items[i]);
-            }
+            self.clearAllItema();
         });
+
     },
 
     /**
@@ -88,6 +87,16 @@ window.SteempunkNet.Items = {
             Item.addEventListener('click', itemClick);
 
             document.body.appendChild(Item);
+        }
+    },
+
+    /**
+     * Delete all chests
+     */
+    clearAllItema: function () {
+        var items = document.querySelectorAll('.sp-item');
+        for (var i = 0, len = items.length; i < len; i++) {
+            items[i].parentNode.removeChild(items[i]);
         }
     }
 };
